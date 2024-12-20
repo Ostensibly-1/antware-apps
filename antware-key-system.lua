@@ -6,8 +6,9 @@
 
 -- How to use
 -- Step 1: Place these in your code:
--- _G.GetKeyLink = "your key link (e.g. pastebin.com/raw/key_for_my_hub)" (THE PASTEBIN NEEDS TO BE FORMATTED LIKE THIS: "return 'your key'")
+-- _G.KeyLink = "your key link (e.g. pastebin.com/raw/key_for_my_hub)" (THE PASTEBIN NEEDS TO BE FORMATTED LIKE THIS: "return 'your key'")
 -- _G.ValidateFunction = function() end; -- this is where the action happens when you validate the key correctly to the key system/redeem the correct key
+-- _G.GetKeyLink = "your get key link" -- this is where like checkpoints happen before you receive the actual key.
 
 local AWUI = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
@@ -164,6 +165,10 @@ do -- KeySystem.KSM
 		if not _G.ValidateFunction then
 			game.Players.LocalPlayer:Kick("ERROR: Please put your 'Validate Function' global function on your script (example: _G.ValidateFunction = function() end;)")
 		end
+
+		if not _G.KeyLink then
+			game.Players.LocalPlayer:Kick("ERROR: Please put your 'Key Link' global on your script (example: _G.KeyLink = 'https://something.com/raw/test')")
+		end;
 		
 		function KSM:new()
 			return setmetatable({
@@ -191,7 +196,7 @@ do -- KeySystem.KSM
 		end
 		
 		function KSM:loadRealKey()
-			return loadstring(game:HttpGet(_G.GetLinkKey))()
+			return loadstring(game:HttpGet(_G.KeyLink))()
 		end
 		
 		function KSM:validate(key, realKey)
