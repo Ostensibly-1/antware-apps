@@ -27,7 +27,7 @@ local KeySystem = Instance.new("Folder")
 -- Properties
 
 AWUI.Name = "AWUI"
-AWUI.Parent = script.Parent
+AWUI.Parent = game.Players.LocalPlayer.PlayerGui
 AWUI.Enabled = true
 AWUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
